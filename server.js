@@ -4,6 +4,8 @@
 // init project
 const express = require('express');
 const app = express();
+const web3 = require('web3');
+const parser = require("body-parser");
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -35,9 +37,16 @@ const listener = app.listen(process.env.PORT, function() {
 });
 
 // =========================== API ============================== //
+var router = express.Router(); 
+app.use('/api', router);
+
+
+router.get('/', function(req, res) {
+    res.json({ "choices": ["contract", "user", "token"] });   
+});
 
 //get contract data
-app.get('/api/contract', function(request, response) {
+router.get('/contract', function(request, response) {
   response.setHeader('Content-Type', 'application/json');
   response.send(JSON.stringify(
     { 
@@ -48,37 +57,28 @@ app.get('/api/contract', function(request, response) {
 });
 
 //return options
-app.get('/api/', function(request, response) {
-  response.setHeader('Content-Type', 'application/json');
-  response.send(JSON.stringify(
-    { 
-      "choices": ["contract", "user", "token"]
-    }
-  ));
-});
+
 
 //use infura for future calls
 //store infura key in enviorment safe
 
 //TODO infura setup
+var infura_endpoint = "https://rinkeby.infura.io/v3/8235d0efb49f4a8eaacdb0544078d834";
+// process.env.InfuraSECRET
+//var web3js = new web3(new web3.providers.WebsocketProvider(infura_endpoint));
+var token_json = [{"token_id": 0,"fundraiser_id": 0,"amount": 0,"donor": "0x0000000000000000000000000000000000000000","is_fundraiser": "TRUE"},{"token_id": 1,"fundraiser_id": 1,"amount": 0,"donor": "0x0000000000000000000000000000000000000000","is_fundraiser": "TRUE"},{"token_id": 2,"fundraiser_id": 1,"amount": 0.01,"donor": "0x5d2364ebcdfb5f64eea3600aad4c054d30900d82","is_fundraiser": "FALSE"},{"token_id": 3,"fundraiser_id": 1,"amount": 0.01,"donor": "0xe4b420f15d6d878dcd0df7120ac0fc1509ee9cab","is_fundraiser": "FALSE"},{"token_id": 4,"fundraiser_id": 1,"amount": 0.033,"donor": "0xe4b420f15d6d878dcd0df7120ac0fc1509ee9cab","is_fundraiser": "FALSE"}];
 
 //TODO return user info based on address
-app.get('/api/user/', function(request, response) {
-  response.setHeader('Content-Type', 'application/json');
-  response.send(JSON.stringify(
-    { 
-      
-    }
-  ));
+router.get('/user', function(req, res) {
+    res.json({ "choices": ["contract", "user", "token"] });   
 });
 
 //TODO return token info from ID
-app.get('/api/', function(request, response) {
+router.route('/token').get( function(request, response) {
+  var token_id = request.param('id');
   response.setHeader('Content-Type', 'application/json');
   response.send(JSON.stringify(
-    { 
-      
-    }
+    token_json[token_id]
   ));
 });
 

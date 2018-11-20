@@ -10,7 +10,11 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "body-parser": "^1.18.3",
+    "mongoose": "^5.3.13",
+    "web3": "^0.20.7",
+    "bignumber": "^1.1.0"
   },
   "engines": {
     "node": "8.x"
