@@ -1,2 +1,7 @@
-# Heritage-API
-An Api for handling Heritage Aero project. Gives info on current state of deployed smart contract on ethereum
+Heritage Node API
+=================
+
+# Docs
+
+## /api/contract
+returns the network and address of the deployed contract this api is using.
