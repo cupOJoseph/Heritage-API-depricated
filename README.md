@@ -10,9 +10,9 @@ returns the network and address of the deployed contract this api is using.
 returns a list of options, that you can use this API for.
 
 ## /api/user/<address>
-return a list of tokens that user owns, the number of tokens they own, their level of contribution
+return a list of tokens that user owns, the number of tokens they own, their level of contribution (to do)
 
-## /api/token?id=<id number>
+## /api/token?id=(id number)
 returns the data associated with that token ID.
 Example: `/api/token?id=4` will return 
 ```
